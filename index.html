@@ -1,0 +1,956 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
+	<link href="https://cdn.forge.tylertech.com/v1/libs/tcw/latest/tcw-material-design.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/css/tyler-icons-extended.css" />
+	<link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/css/tyler-icons-custom.css" />
+	<link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/css/tyler-icons-standard.css" />
+	</script>
+</head>
+
+<body class="tyl-typography">
+	<tcw-scaffold>
+		<tcw-omnibar title-text="iasWorld v2.0" slot="header">
+      <tcw-omnibar-menu-button id="navMenu" slot="menu"></tcw-omnibar-menu-button>
+      <div slot="action">
+        <span>Admin</span>
+        <i class="tyler-icons" style="vertical-align: bottom;">arrow_drop_down</i>
+      </div>
+      <tcw-omnibar-notification-button id="notificationItem" count="0" slot="action"></tcw-omnibar-notification-button>
+      <tcw-omnibar-profile-button slot="action" avatar-text="Chris Drake"></tcw-omnibar-profile-button>
+      <tcw-omnibar-help-button slot="action" id="helpButton"></tcw-omnibar-help-button>
+    </tcw-omnibar>
+
+    <!-- nav menu -->
+    <div slot="body-left">
+      <tcw-drawer id="navDrawer" type="modal" open="false">
+        <tcw-list>
+          <tcw-list-item id="navDashboard">
+            <i class="tyler-icons" slot="leading">dashboard</i>
+            Dashboard
+          </tcw-list-item>
+          <tcw-list-item>
+            <i class="tyler-icons" slot="leading">list</i>
+            Property Records
+          </tcw-list-item>
+          <!--
+          <tcw-list-item id="navReports">
+            <i class="tyler-icons-ext" slot="leading">file_document_box_multiple</i>
+            Report & Job Submission
+          </tcw-list-item> -->
+
+          <tcw-expansion-panel id="jobsPanel">
+            <tcw-list-item slot="header">
+                <i class="tyler-icons-ext" slot="leading">file_document_box_multiple</i>
+                <div id="navReports">
+                  Report & Job Submission 
+                </div>
+              <tcw-open-icon slot="trailing"></tcw-open-icon>
+            </tcw-list-item>
+            <tcw-list style="padding-left: 55px;">
+              <tcw-list-item id="navFirstHalf">1st Half Settlement</tcw-list-item>
+              <tcw-list-item>Tax Extension</tcw-list-item>
+            </tcw-list>
+          </tcw-expansion-panel>
+        </tcw-list>
+      </tcw-drawer>
+    </div>
+    <!-- end nav menu -->
+
+    <!-- Dashboard body -->
+		<div id="dashboardBody" slot="body" class="tyl-content-container">
+			<div class="tyl-content">
+				<h1 class="tyl-typography--body1 tyl-remove-spacing">Dashboard gadgets would be here.</h1>
+        <br/>
+        <h1 class="tyl-typography--body1 tyl-remove-spacing">This mockup is designed for 1920x1200 resolution. If your resolution is smaller than this and/or zoomed in, this may not display correctly.</h1>
+        <!--<tcw-button id="testButton">
+          <button type="button">Click</button>
+        </tcw-button> -->
+			</div>
+      <div style="text-align: center;">
+        <img width="450" src="https://media.giphy.com/media/3oKIPEqDGUULpEU0aQ/giphy.gif" />
+      </div>
+		</div>
+    <!-- End Dashboard body -->
+
+    <!-- Reports Left Menu -->
+
+    <div id="reportsLeft" class="hidden" slot="body-left">
+      <tcw-drawer class="reportsFilters">
+        <div id="reportsLeftFilters">
+          <h2 class="tyl-typography--headline5">Filters</h2>
+          <div style="display: flex;">
+            <p class="tyl-typography--caption">0 filters applied</p>
+            <tcw-button style="padding-left: 160px;">
+              <button type="button">Reset all</button>
+            </tcw-button>
+          </div>
+          <div class="reportsFiltersDiv">
+            <div style="display: flex;">
+              <h2 class="tyl-typography--subtitle1">Submitted Date</h2>
+              <tcw-button style="padding-left: 12px; padding-top: 6px;">
+                <button type="button">Clear</button>
+              </tcw-button>
+              <i class="tyler-icons" style="padding-left: 80px; padding-top: 12px;">keyboard_arrow_up</i>
+            </div>
+            <tcw-datepicker>
+              <tcw-text-field>
+                <input type="text" id="fromFilter" />
+                <label for="fromFilter">From</label>
+              </tcw-text-field>
+            </tcw-datepicker>
+            <tcw-datepicker>
+              <tcw-text-field>
+                <input type="text" id="toFilter" />
+                <label for="toFilter">To</label>
+              </tcw-text-field>
+            </tcw-datepicker>
+          </div>
+          <tcw-divider></tcw-divider>
+          <div class="reportsFiltersDiv">
+            <div style="display: flex;">
+              <h2 class="tyl-typography--subtitle1">Job Information</h2>
+              <tcw-button style="padding-left: 12px; padding-top: 6px;">
+                <button type="button">Clear</button>
+              </tcw-button>
+              <i class="tyler-icons" style="padding-left: 80px; padding-top: 12px;">keyboard_arrow_up</i>
+            </div>
+            <tcw-text-field>
+              <input type="text" id="filterUser" data-lpignore="true" />
+              <label for="filterUser" slot="label">User</label>
+            </tcw-text-field>
+            <tcw-text-field>
+              <input type="text" id="filterJobID" />
+              <label for="filterJobID" slot="label">Job ID, Job Name</label>
+            </tcw-text-field>
+            <tcw-select label="Job Status">
+              <tcw-option value=""></tcw-option>
+              <tcw-option value="Done">Done</tcw-option>
+              <tcw-option value="Running">Running</tcw-option>
+            </tcw-select>
+            <tcw-select label="Job Type"></tcw-select>
+          </div>
+          <tcw-divider></tcw-divider>
+          <div class="reportsFiltersDiv">
+            <div style="display: flex;">
+              <h2 class="tyl-typography--subtitle1">Role</h2>
+              <tcw-button style="padding-left: 12px; padding-top: 6px;">
+                <button type="button">Clear</button>
+              </tcw-button>
+              <i class="tyler-icons" style="padding-left: 80px; padding-top: 12px;">keyboard_arrow_up</i>
+            </div>
+            <tcw-list dense class="noPad">
+              <tcw-list-item class="noPad">
+                <tcw-checkbox class="noPad" slot="leading">
+                  <input type="checkbox" aria-label="Select list item one" />
+                </tcw-checkbox>
+                <span class="tyl-list-item__text">Admin</span>
+              </tcw-list-item>
+              <tcw-list-item class="noPad">
+                <tcw-checkbox class="noPad" slot="leading">
+                  <input type="checkbox" aria-label="Select list item one" />
+                </tcw-checkbox>
+                <span class="tyl-list-item__text">Assessor</span>
+              </tcw-list-item>
+              <tcw-list-item class="noPad">
+                <tcw-checkbox class="noPad" slot="leading">
+                  <input type="checkbox" aria-label="Select list item one" />
+                </tcw-checkbox>
+                <span class="tyl-list-item__text">Cashier</span>
+              </tcw-list-item>
+              <tcw-list-item class="noPad">
+                <tcw-checkbox class="noPad" slot="leading">
+                  <input type="checkbox" aria-label="Select list item one" />
+                </tcw-checkbox>
+                <span class="tyl-list-item__text">Clerk</span>
+              </tcw-list-item>
+              <tcw-list-item class="noPad">
+                <tcw-checkbox class="noPad" slot="leading">
+                  <input type="checkbox" aria-label="Select list item one" />
+                </tcw-checkbox>
+                <span class="tyl-list-item__text">Etc...</span>
+              </tcw-list-item>
+            </tcw-list>
+          </div>
+        </div>
+      </tcw-drawer>
+    </div>
+
+    <!-- End Reports Left Menu -->
+
+    <!-- Reports Header -->
+    <tcw-toolbar id="reportsHeader" class="hidden" slot="body-header">
+      <div slot="start">
+        <h1 slot="body-header" class="tyl-typography--title">Reports & Jobs</h1>
+        <tcw-tab-bar class="view-tab-bar" slot="start" underline>
+          <button id="tabOne">
+            <span>Running & Completed</span>
+          </button>
+          <button id="tabTwo">
+            <span>Job Schedules</span>
+          </button>
+          <button id="tabThree" class="hidden">
+            <span>Job Tracks</span>
+          </button>
+          <button id="tabFour">
+            <span>ID List Setup</span>
+          </button>
+        </tcw-tab-bar>
+      </div>
+    </tcw-toolbar>
+
+    <!-- End reports header -->
+
+    <!-- Reports Body  Page 1-->
+    <div id="reportsBodytabOne" class="hidden" slot="body" class="tyl-content-container">
+  	  <tcw-card has-padding="false" class="table-card rightAlignCard">
+		    <tcw-toolbar id="table-head">
+  	      <h3 slot="start" class="tyl-typography--headline5">Jobs (4)</h3>
+		      <tcw-button slot="end" type="raised" id="submitJob">
+  	        <button type="button"><i class="material-icons">add</i> Submit New Job</button>
+		      </tcw-button>
+		    </tcw-toolbar>
+
+		    <tcw-toolbar class="select-toolbar hide" id="select-toolbar">
+  	      <h2 slot="start" class="tyl-typography--body1">
+		        <span id="num-selected-records">1 record</span> selected
+		      </h2>
+		      <h2 slot="start" style="margin-left: 16px" class="tyl-typography--body1">
+  	        <a href="#">Select all available records</a>
+		      </h2>
+		      <tcw-icon-button slot="end">
+  	        <button class="material-icons">delete</button>
+            <tcw-tooltip>Delete selected jobs</tcw-tooltip>
+		      </tcw-icon-button>
+		    </tcw-toolbar>
+		    <tcw-table select dense id="completed-jobs-table">
+		    </tcw-table>
+		    <div class="container__paginator">
+  	      <tcw-paginator total="100"></tcw-paginator>
+		    </div>
+		  </tcw-card>
+      <br/>
+      <tcw-card id="extraJobFiles" class="table-card rightAlignCard hidden" style="max-width: 450px; padding-left: 1050px;">
+        <h2 class="tyl-typography--body1">Additional Output Files for Job #671914</h2>
+        <tcw-list>
+          <tcw-list-item two-line="true" class="noPad">
+            <i class="tyler-icons-ext" slot="avatar">file_document_box_outline</i>
+            <span class="tyl-list-item__title">CA320_File2.PDF</span>
+            <span class="tyl-list-item__subtitle">320Kb</span>
+            <!-- button -->
+            <tcw-button slot="trailing">
+              <button id="dl-button">Download</button>
+            </tcw-button>
+          </tcw-list-item>
+          <tcw-divider></tcw-divider>
+          <tcw-list-item two-line="true" class="noPad">
+            <i class="tyler-icons-ext" slot="avatar">file_document_box_outline</i>
+            <span class="tyl-list-item__title">CA320_File3.PDF</span>
+            <span class="tyl-list-item__subtitle">1,482Kb</span>
+            <!-- button -->
+            <tcw-button slot="trailing">
+              <button id="dl-button">Download</button>
+            </tcw-button>
+          </tcw-list-item>
+          <tcw-divider></tcw-divider>
+        </tcw-list>
+      </tcw-card>
+    </div>
+
+      <!-- new job dialog template -->
+      <div id="newJobDialogContainer">
+        <template id="newJobDialog">
+          <div class="tyl-dialog-container">
+            <tcw-toolbar class="dialog-header">
+              <h1 id="newJobDialogHeader" slot="start" class="tyl-typography--title">Submit a New Job</h1>
+            </tcw-toolbar>
+            <tcw-stepper id="newJobStepper" alternative="true" layoutMode="condensed" selectedIndex=1></tcw-stepper>
+
+            <div class="tyl-dialog-body__padding">
+              <!-- first step -->
+              <div id="submitJobPage1">
+                <div class="displayedStep1">
+								  <label for="jobTypeRadioGroup" style="padding-top: 10px; padding-right: 24px;" class="tyl-typography--title">What type of job do you want to run?</label>
+                  <div id="jobTypeRadioGroup" role="radiogroup" aria-label="Choose radio option">
+  									<div class="tyl-form-field">
+										  <tcw-radio>
+  											<input type="radio" id="singleJob" name="jobTypeRadio" value="single" checked/>
+                      </tcw-radio>
+										  <label for="singleJob">Single Job</label>
+									  </div>
+									  <div class="tyl-form-field">
+  										<tcw-radio>
+											  <input type="radio" id="trackJob" name="jobTypeRadio" value="track"/>
+                      </tcw-radio>
+										  <label for="trackJob">Job in a Track</label>
+									  </div>
+								  </div> 
+                </div>
+
+                <!-- single job list -->
+                <div id="singleJobContainer" class="hidden">
+                  <div id="singleJob" class="displayedStep1">
+                    <tcw-text-field>
+                      <input type="text" id="singleJobFilter"/>
+                      <label for="singleJobFilter" slot="label">Job ID, Name</label>
+                      <i class="tyler-icons" slot="trailing">search</i>
+                    </tcw-text-field>
+                  </div>
+                  <div id="singleJobList" class="displayedStep1 dialog-table-container">
+                    <tcw-table id="singleJobListTable" fixedHeaders="true" layoutType="fixed"></tcw-table>
+                  </div>
+                </div>
+
+                <!-- track list -->
+                <div id="trackJobContainer" class="hidden">
+                  <tcw-list>
+                   <tcw-expansion-panel id="firstHalfExpansion">
+                     <tcw-list-item slot="header" class="topLevel">
+                       1st Half Settlement
+                       <tcw-open-icon slot="trailing"></tcw-open-icon>
+                     </tcw-list-item>
+                     <tcw-list id="firstHalfSettlementBoxes">
+                       <tcw-list-item indented class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" id="firstHalfAllCheckbox"/>
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">Run all jobs in this track</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented two-line="true" class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">Reset Settle Flags (ST425OH)</span>
+                         <span class="tyl-list-item__subtitle">Last Run: 04/30/2020 (amos.burton)</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented two-line="true" class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">Settlement Check (ST399)</span>
+                         <span class="tyl-list-item__subtitle">Last Run: 05/01/2020 (amos.burton)</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented two-line="true" class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">Year to Date Totals (TX101OH)</span>
+                         <span class="tyl-list-item__subtitle">Last Run: 09/29/2020 (naomi.nagata)</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented two-line="true" class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">Settlement Extract (ST400)</span>
+                         <span class="tyl-list-item__subtitle">Last Run: 05/01/2020 (james.holden)</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented two-line="true" class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">OH - Settlement Extract (ST400OH)</span>
+                         <span class="tyl-list-item__subtitle">Last Run: Never run</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented two-line="true" class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">OH - State Sheet (ST101OH)</span>
+                         <span class="tyl-list-item__subtitle">Last Run: Never run</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented two-line="true" class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">OH - Year to Date Totals (TX101OH)</span>
+                         <span class="tyl-list-item__subtitle">Last Run: 12/20/2019 (nancy.drew)</span>
+                       </tcw-list-item>
+                     </tcw-list>
+                   </tcw-expansion-panel>
+                   <tcw-expansion-panel>
+                     <tcw-list-item slot="header" class="topLevel">
+                       Escrow Rollover
+                       <tcw-open-icon slot="trailing"></tcw-open-icon>
+                     </tcw-list-item>
+                     <tcw-list role="radiogroup">
+                       <tcw-list-item indented class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">Run all jobs in this track</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">Escrow Rollover (ES401)</span>
+                       </tcw-list-item>
+                       <tcw-list-item indented class="trackReport">
+                         <tcw-checkbox slot="leading">
+                           <input type="checkbox" name="list-radio" />
+                         </tcw-checkbox>
+                         <span class="tyl-list-item__text">Escrow Coupons (ES300OH)</span>
+                       </tcw-list-item>
+                     </tcw-list>
+                   </tcw-expansion-panel>
+                  </tcw-list>
+                </div>
+
+             </div>
+
+              <!-- second step -->
+              <div id="submitJobPage2" class="hidden">
+                <div style="display: block;">
+                  <div style="padding-left: 100px;">
+                    <h2 class="tyl-typography--title">Enter parameters for ST400OH</h2>
+                  </div>
+                <!-- option 2: above -->
+                <div style="padding-left: 100px;">
+                  <tcw-button>
+                    <button type="button">Use Default Parameters</button>
+                  </tcw-button>
+                </div>
+                <div style="padding-left: 90px; display: flex;">
+                  <button id="savedParamsButton" type="button" class="tyl-task-card__header" style="text-align: left; justify-content: left; max-width: 400px;">Load parameters from a previous job
+                    <tcw-open-icon orientation="horizontal"></tcw-open-icon>
+                  </button>  
+                  <!-- option 1: to the right -->
+                  <!-- <div style="padding-top: 12px; padding-left: 150px;">
+                    <tcw-button>
+                      <button type="button">Use Default Parameters</button>
+                    </tcw-button>                 
+                  </div>  -->
+                </div>
+                </div>
+                <div style="padding-left: 100px; max-width: 250px;">
+  								<tcw-select label="Jurisdiction" required>
+									  <tcw-option value="000">000</tcw-option>
+									  <tcw-option value="100">100</tcw-option>
+								  </tcw-select>
+								  <tcw-text-field required="true">
+  									<input type="text" id="taxyr" />
+									  <label for="taxyr" slot="label">Tax Year</label>
+								  </tcw-text-field>
+								  <tcw-text-field required="true">
+  									<input type="text" id="prtque" />
+									  <label for="prtque" slot="label">Spool File Name</label>
+								  </tcw-text-field>
+								  <tcw-select label="Output File Type" required>
+  									<tcw-option value="PDF">PDF</tcw-option>
+									  <tcw-option value="IASW_PS">IASW_PS</tcw-option>
+								  </tcw-select>
+							  </div>
+							  <div style="padding-left: 100px; display: flex;">
+  								<tcw-text-field style="width: 250px; padding-right: 24px;">
+									  <input type="text" id="befor" />
+									  <label for="befor" slot="label">Beginning Business Date</label>
+									  <i class="tyler-icons" slot="trailing">event</i>
+								  </tcw-text-field>
+								  <tcw-text-field style="max-width: 250px;">
+  									<input type="text" id="afte" />
+									  <label for="afte" slot="label">Ending Business Date</label>
+									  <i class="tyler-icons" slot="trailing">event</i>
+								  </tcw-text-field>
+							  </div>
+							  <div style="padding-left: 100px; display: flex;">
+  								<tcw-text-field style="width: 250px; padding-right: 24px;">
+									  <input type="text" id="id1" />
+									  <label for="id1" slot="label">Beginning Parcel ID or 'IDLIST'</label>
+								  </tcw-text-field>
+								  <tcw-text-field style="width: 238px;">
+  									<input type="text" id="id2" />
+									  <label for="id2" slot="label">Ending Parcel ID or Setname</label>
+								  </tcw-text-field>
+								  <i class="tyler-icons" style="padding-top: 13px; padding-left; 4px; font-size: 24px;">view_list</i>
+							  </div>
+							  <div style="padding-left: 100px; max-width: 250px;">
+  								<tcw-select label="Rolltype">
+									  <tcw-option value="RP">RP</tcw-option>
+									  <tcw-option value="PP">PP</tcw-option>
+								  </tcw-select>
+								  <tcw-text-field>
+  									<input type="text" id="param2" />
+									  <label for="param2" slot="label">Frequency</label>
+								  </tcw-text-field>
+								  <tcw-text-field>
+  									<input type="text" id="param3" />
+									  <label for="param3" slot="label">Prior Year</label>
+								  </tcw-text-field>
+							  </div>
+              </div>
+
+              <div id="page2SavedParams" class="hidden" style="height: 50vh;">
+                <div>
+								  <tcw-expansion-panel>
+  									<tcw-list-item slot="header" id="backToPage2" class="noPad">
+										  Back to Parameter Form
+										  <i class="material-icons" slot="leading">arrow_back</i>
+									  </tcw-list-item>
+									  <tcw-list class="hidden">
+  										<tcw-list-item id="" class="hidden">
+										  </tcw-list-item>
+										  <tcw-list-item id="navLink2" class="hidden">
+										  </tcw-list-item>
+									  </tcw-list>
+								  </tcw-expansion-panel>
+                </div>
+                <div style="padding-left: 100px;">
+                  <tcw-table dense id="params-table">
+				          </tcw-table>
+                </div> 
+              </div>
+
+              <!-- third step -->
+              <div id="submitJobPage3" class="hidden" style="height: 50vh;">
+                <h1 class="tyl-typography--title" style="padding-left: 100px;">When do you want to run this job?</h1>
+                <div id="radgroup02" role="radiogroup" aria-label="Choose radio option" style="display: block; padding-left: 100px; max-width: 200px; text-align: left;">
+  							  <div class="tyl-form-field">
+							      <tcw-radio>
+  							      <input type="radio" id="radio05" name="runradio" value="runNow" checked/>
+                    </tcw-radio>
+							      <label for="radio05">Run Now</label>
+							    </div>
+							    <div class="tyl-form-field">
+  							    <tcw-radio>
+							        <input type="radio" id="radio06" name="runradio" value="runLaterOnce" />
+                    </tcw-radio>
+							      <label for="radio06">Run Later - Once</label>
+							    </div>
+							    <div class="tyl-form-field">
+  							    <tcw-radio>
+							        <input type="radio" id="radio07" name="runradio" value="runLaterRepeat" />
+                    </tcw-radio>
+							      <label for="radio07">Run Later - Repeat</label>
+							    </div>
+                </div>
+
+                <!-- Run Now -->
+                <div id="runNowContainer" class="hidden">
+                </div>
+
+                <!-- Run Later Once -->
+                <div id="runLaterOnceContainer" style="padding-top: 24px;" class="hidden">
+                  <div style="padding-left: 100px; display: flex; max-width: 550px;">
+                    <h2 class="tyl-typography--body1" style="padding-right: 22px;">Run on </h2>
+                    <tcw-datepicker>
+                      <tcw-text-field>
+                        <input type="text" id="sched_time" />
+                        <label for="sched_time">Enter Date</label>
+                      </tcw-text-field>
+                    </tcw-datepicker>
+                  </div>
+                  <div style="padding-left: 145px; display: flex;">
+                    <h2 class="tyl-typography--body1" style="padding-right: 12px;">At </h2>
+                    <tcw-select label="Hour" style="width: 90px; padding-right: 12px;">
+                      <tcw-option value="1">1</tcw-option>
+                      <tcw-option value="2">2</tcw-option>
+                      <tcw-option value="3">3</tcw-option>
+                      <tcw-option value="4">4</tcw-option>
+                      <tcw-option value="5">5</tcw-option>
+                      <tcw-option value="6">6</tcw-option>
+                      <tcw-option value="7">7</tcw-option>
+                      <tcw-option value="8">8</tcw-option>
+                      <tcw-option value="9">9</tcw-option>
+                      <tcw-option value="10">10</tcw-option>
+                      <tcw-option value="11">11</tcw-option>
+                      <tcw-option value="12">12</tcw-option>
+                    </tcw-select>
+                    <tcw-select label="Minute" style="width: 90px; padding-right: 12px;">
+                      <tcw-option value="01">01</tcw-option>
+                      <tcw-option value="02">02</tcw-option>
+                      <tcw-option value="03">03</tcw-option>
+                      <tcw-option value="04">04</tcw-option>
+                      <tcw-option value="05">05</tcw-option>
+                      <tcw-option value="06">06</tcw-option>
+                      <tcw-option value="07">07</tcw-option>
+                      <tcw-option value="08">08</tcw-option>
+                      <tcw-option value="09">09</tcw-option>
+                      <tcw-option value="10">10</tcw-option>
+                      <tcw-option value="11">11</tcw-option>
+                      <tcw-option value="12">12</tcw-option>
+                      <tcw-option value="13">13</tcw-option>
+                      <tcw-option value="14">14</tcw-option>
+                      <tcw-option value="15">15</tcw-option>
+                      <tcw-option value="16">16</tcw-option>
+                      <tcw-option value="17">17</tcw-option>
+                      <tcw-option value="18">18</tcw-option>
+                      <tcw-option value="19">19</tcw-option>
+                      <tcw-option value="20">20</tcw-option>
+                      <tcw-option value="21">21</tcw-option>
+                      <tcw-option value="22">22</tcw-option>
+                      <tcw-option value="23">23</tcw-option>
+                      <tcw-option value="24">24</tcw-option>
+                      <tcw-option value="25">25</tcw-option>
+                      <tcw-option value="26">26</tcw-option>
+                      <tcw-option value="27">27</tcw-option>
+                      <tcw-option value="28">28</tcw-option>
+                      <tcw-option value="29">29</tcw-option>
+                      <tcw-option value="30">30</tcw-option>
+                      <tcw-option value="31">31</tcw-option>
+                      <tcw-option value="32">32</tcw-option>
+                      <tcw-option value="33">33</tcw-option>
+                      <tcw-option value="34">34</tcw-option>
+                      <tcw-option value="35">35</tcw-option>
+                      <tcw-option value="36">36</tcw-option>
+                      <tcw-option value="37">37</tcw-option>
+                      <tcw-option value="38">38</tcw-option>
+                      <tcw-option value="39">39</tcw-option>
+                      <tcw-option value="40">40</tcw-option>
+                      <tcw-option value="41">41</tcw-option>
+                      <tcw-option value="42">42</tcw-option>
+                      <tcw-option value="43">43</tcw-option>
+                      <tcw-option value="44">44</tcw-option>
+                      <tcw-option value="45">45</tcw-option>
+                      <tcw-option value="46">46</tcw-option>
+                      <tcw-option value="47">47</tcw-option>
+                      <tcw-option value="48">48</tcw-option>
+                      <tcw-option value="49">49</tcw-option>
+                      <tcw-option value="50">50</tcw-option>
+                      <tcw-option value="51">51</tcw-option>
+                      <tcw-option value="52">52</tcw-option>
+                      <tcw-option value="53">53</tcw-option>
+                      <tcw-option value="54">54</tcw-option>
+                      <tcw-option value="55">55</tcw-option>
+                      <tcw-option value="56">56</tcw-option>
+                      <tcw-option value="57">57</tcw-option>
+                      <tcw-option value="58">58</tcw-option>
+                      <tcw-option value="59">59</tcw-option>
+                      <tcw-option value="60">60</tcw-option>
+                    </tcw-select>
+                    <tcw-select label="AM/PM" style="width: 90px;" >
+                      <tcw-option value="AM">AM</tcw-option>
+                      <tcw-option value="PM">PM</tcw-option>
+                    </tcw-select>
+                  </div>
+                </div>
+
+                <!-- Run Later Repeat -->
+                <div id="runLaterRepeatContainer" style="padding-top: 24px;" class="hidden">
+                 <div style="padding-left: 100px; display: flex;">
+                  <h2 class="tyl-typography--body1" style="padding-right: 12px;">Run At </h2>
+                  <tcw-select label="Hour" style="width: 90px; padding-right: 12px;">
+                      <tcw-option value="1">1</tcw-option>
+                      <tcw-option value="2">2</tcw-option>
+                      <tcw-option value="3">3</tcw-option>
+                      <tcw-option value="4">4</tcw-option>
+                      <tcw-option value="5">5</tcw-option>
+                      <tcw-option value="6">6</tcw-option>
+                      <tcw-option value="7">7</tcw-option>
+                      <tcw-option value="8">8</tcw-option>
+                      <tcw-option value="9">9</tcw-option>
+                      <tcw-option value="10">10</tcw-option>
+                      <tcw-option value="11">11</tcw-option>
+                      <tcw-option value="12">12</tcw-option>
+                  </tcw-select>
+                  <tcw-select label="Minute" style="width: 90px; padding-right: 12px;">
+                      <tcw-option value="01">01</tcw-option>
+                      <tcw-option value="02">02</tcw-option>
+                      <tcw-option value="03">03</tcw-option>
+                      <tcw-option value="04">04</tcw-option>
+                      <tcw-option value="05">05</tcw-option>
+                      <tcw-option value="06">06</tcw-option>
+                      <tcw-option value="07">07</tcw-option>
+                      <tcw-option value="08">08</tcw-option>
+                      <tcw-option value="09">09</tcw-option>
+                      <tcw-option value="10">10</tcw-option>
+                      <tcw-option value="11">11</tcw-option>
+                      <tcw-option value="12">12</tcw-option>
+                      <tcw-option value="13">13</tcw-option>
+                      <tcw-option value="14">14</tcw-option>
+                      <tcw-option value="15">15</tcw-option>
+                      <tcw-option value="16">16</tcw-option>
+                      <tcw-option value="17">17</tcw-option>
+                      <tcw-option value="18">18</tcw-option>
+                      <tcw-option value="19">19</tcw-option>
+                      <tcw-option value="20">20</tcw-option>
+                      <tcw-option value="21">21</tcw-option>
+                      <tcw-option value="22">22</tcw-option>
+                      <tcw-option value="23">23</tcw-option>
+                      <tcw-option value="24">24</tcw-option>
+                      <tcw-option value="25">25</tcw-option>
+                      <tcw-option value="26">26</tcw-option>
+                      <tcw-option value="27">27</tcw-option>
+                      <tcw-option value="28">28</tcw-option>
+                      <tcw-option value="29">29</tcw-option>
+                      <tcw-option value="30">30</tcw-option>
+                      <tcw-option value="31">31</tcw-option>
+                      <tcw-option value="32">32</tcw-option>
+                      <tcw-option value="33">33</tcw-option>
+                      <tcw-option value="34">34</tcw-option>
+                      <tcw-option value="35">35</tcw-option>
+                      <tcw-option value="36">36</tcw-option>
+                      <tcw-option value="37">37</tcw-option>
+                      <tcw-option value="38">38</tcw-option>
+                      <tcw-option value="39">39</tcw-option>
+                      <tcw-option value="40">40</tcw-option>
+                      <tcw-option value="41">41</tcw-option>
+                      <tcw-option value="42">42</tcw-option>
+                      <tcw-option value="43">43</tcw-option>
+                      <tcw-option value="44">44</tcw-option>
+                      <tcw-option value="45">45</tcw-option>
+                      <tcw-option value="46">46</tcw-option>
+                      <tcw-option value="47">47</tcw-option>
+                      <tcw-option value="48">48</tcw-option>
+                      <tcw-option value="49">49</tcw-option>
+                      <tcw-option value="50">50</tcw-option>
+                      <tcw-option value="51">51</tcw-option>
+                      <tcw-option value="52">52</tcw-option>
+                      <tcw-option value="53">53</tcw-option>
+                      <tcw-option value="54">54</tcw-option>
+                      <tcw-option value="55">55</tcw-option>
+                      <tcw-option value="56">56</tcw-option>
+                      <tcw-option value="57">57</tcw-option>
+                      <tcw-option value="58">58</tcw-option>
+                      <tcw-option value="59">59</tcw-option>
+                      <tcw-option value="60">60</tcw-option>
+                  </tcw-select>
+                  <tcw-select label="AM/PM" style="width: 90px;">
+                    <tcw-option value="AM">AM</tcw-option>
+                    <tcw-option value="PM">PM</tcw-option>
+                  </tcw-select>
+                  </div>
+                  <div style="display: flex; align: left; text-align: left; width: 550px; padding-top: 0px; padding-left: 100px;">
+                    <h2 class="tyl-typography--body1" style="padding-right: 22px;">From </h2>
+                    <tcw-datepicker>
+                      <tcw-text-field>
+                        <input type="text" id="sched_time" />
+                        <label for="sched_time">Start Date</label>
+                      </tcw-text-field>
+                    </tcw-datepicker>
+                    <h2 class="tyl-typography--body1" style="padding-right: 22px; padding-left: 14px;">To </h2>
+                    <tcw-datepicker>
+                      <tcw-text-field>
+                        <input type="text" id="sched_time2" />
+                        <label for="sched_time2">End Date</label>
+                      </tcw-text-field>
+                    </tcw-datepicker>
+                  </div>
+                  <div>
+                    <h2 class="tyl-typography--subtitle1">Additional scheduling options to be determined...</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer">
+  						<tcw-toolbar inverted="true" style="--tyl-toolbar-height: 62px;" class="footer-toolbar">
+							  <div slot="start">
+  								<tcw-button type="outlined" class="hidden" id="newJobPreviousButton">
+									  <button>Previous</button>
+								  </tcw-button>
+							  </div>
+							  <div slot="end">
+  								<tcw-button type="outlined" id="newJobCancelButton">
+									  <button>Cancel</button>
+								  </tcw-button>
+								  <tcw-button type="raised" id="newJobNextButton">
+  									<button tcw-dialog-focus>Next</button>
+								  </tcw-button>
+								  <tcw-button type="raised" class="hidden" id="newJobSubmitButton">
+  									<button tcw-dialog-focus>Submit</button>
+								  </tcw-button>
+							  </div>
+						  </tcw-toolbar>
+            </div>
+          </div>
+        </template>
+      </div>
+      <!-- end new job dialog template -->
+
+      <!-- job details dialog template -->
+      <div id="jobDetailsDialogContainer">
+        <template id="jobDetailsDialog">
+          <div class="tyl-dialog-container">
+            <tcw-toolbar class="dialog-header">
+              <h1 slot="start" class="tyl-typography--title">Job Details</h1>
+            </tcw-toolbar>
+            
+            <div class="tyl-dialog-body__padding" style="display: flex;">
+              <div style="display: block; padding-right: 48px;">
+                <tcw-label-value>
+                  <span slot="label">Job #</span>
+                  <span slot="value">671914</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Job ID and Name</span>
+                  <span slot="value">CA320 Residential Review Card</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">User</span>
+                  <span slot="value">chris.drake</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Role</span>
+                  <span slot="value">Assessor</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Submitted Time</span>
+                  <span slot="value">09/28/2020 01:40 PM</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Start Time</span>
+                  <span slot="value">09/28/2020 01:40 PM</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">End Time</span>
+                  <span slot="value">09/28/2020 01:40 PM</span>
+                </tcw-label-value>
+              </div>
+              <div style="display: block;">
+                <tcw-label-value>
+                  <span slot="label">Elapsed Time</span>
+                  <span slot="value">00:00:13</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Status</span>
+                  <span slot="value">Failed</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Fault Code</span>
+                  <span slot="value">501 - Job did not enter running state within allowed time limit</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Error Count</span>
+                  <span slot="value">0</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Spool File</span>
+                  <span slot="value">CA320.PDF</span>
+                </tcw-label-value>
+                <tcw-label-value>
+                  <span slot="label">Job Type</span>
+                  <span slot="value">Batch</span>
+                </tcw-label-value>
+              </div>
+            </div>
+
+            <div class="footer">
+              <tcw-toolbar inverted="true" style="--tyl-toolbar-height: 62px;" class="footer-toolbar">
+                <div slot="end">
+                  <tcw-button type="raised" id="jobDetailsCloseButton">
+                    <button>Close</button>
+                  </tcw-button>
+                </div>
+              </tcw-toolbar>
+            </div>
+          </div>
+        </template>
+      </div>
+      <!-- end job details dialoy template -->
+
+    <!-- End Reports Body  Page 1-->
+
+    <!-- Reports Body Page 2 -->
+    <div id="reportsBodytabTwo" class="hidden" slot="body" class="tyl-content-container">
+  	  <tcw-card has-padding="false" class="table-card rightAlignCard">
+        <tcw-toolbar id="schedule-table-head">
+          <h3 slot="start" class="tyl-typography--headline5">Schedules (2)</h3>
+          <tcw-button slot="end" type="raised" id="addSchedule">
+            <button type="button">Add a New Schedule</button>
+          </tcw-button>
+        </tcw-toolbar>
+
+		    <tcw-toolbar class="select-toolbar hide" id="schedule-select-toolbar">
+  	      <h2 slot="start" class="tyl-typography--body1">
+		        <span id="num-schedule-selected-records">1 record</span> selected
+		      </h2>
+		      <h2 slot="start" style="margin-left: 16px" class="tyl-typography--body1">
+  	        <a href="#">Select all available records</a>
+		      </h2>
+		      <tcw-icon-button slot="end">
+  	        <button class="material-icons">delete</button>
+            <tcw-tooltip>Delete selected schedules</tcw-tooltip>
+		      </tcw-icon-button>
+		    </tcw-toolbar>
+
+        <tcw-table select id="schedule-table"></tcw-table>
+        <div class="container__paginator">
+          <tcw-paginator total="100"></tcw-paginator>
+        </div>
+  	  </tcw-card>
+    </div>
+    <!-- End Reports Body Page 2 -->
+
+    <!-- Reports Body Page 3 -->
+    <div id="reportsBodytabThree" class="hidden" slot="body" class="tyl-content-container">
+      <div style="padding-top: 24px; padding-left: 24px;">
+        <h2 class="tyl-typography--subtitle1">This will most likely be an Admin page. Including here for visibility.</h2>
+      </div>
+  	  <tcw-card has-padding="false" class="table-card rightAlignCard">
+        <tcw-toolbar id="track-table-head">
+          <h3 slot="start" class="tyl-typography--headline5">Tracks (2)</h3>
+          <tcw-button slot="end" type="raised" id="addTrack">
+            <button type="button">Add a New Track</button>
+          </tcw-button>
+        </tcw-toolbar>
+
+        <tcw-toolbar class="select-toolbar hide" id="track-select-toolbar">
+          <h2 slot="start" class="tyl-typography--body1">
+            <span id="num-track-selected-records">1 record</span> selected
+          </h2>
+          <h2 slot="start" style="margin-left: 16px;" class="tyl-typography--body1">
+            <a href="#">Select all available records</a>
+          </h2>
+          <tcw-icon-button slot="end">
+            <button class="material-icons">delete</button>
+          </tcw-icon-button>
+        </tcw-toolbar>
+
+        <tcw-table select id="track-table"></tcw-table>
+        <div class="container__paginator">
+          <tcw-paginator total="100"></tcw-paginator>
+        </div>
+  	  </tcw-card>
+    </div>
+    <!-- End Reports Body Page 3 -->
+
+    <!-- Reports Body Page 4 -->
+    <div id="reportsBodytabFour" class="hidden" slot="body" class="tyl-content-container">
+  	  <tcw-card has-padding="false" class="table-card rightAlignCard">
+        <tcw-toolbar id="idlist-table-head">
+          <h3 slot="start" class="tyl-typography--headline5">ID Lists (n)</h3>
+        </tcw-toolbar>
+        <div style="padding: 24px;">
+          <img src="https://media.giphy.com/media/UTkWBBmaghvM6ahetB/giphy.gif" />
+        </div>
+  	  </tcw-card>
+    </div>
+    <!-- End Reports Body Page 4 -->
+
+    <!-- notification dialog -->
+<div id="notificationDialogContainer">
+  <template id="notificationDialog">
+    <tcw-toolbar class="dialog-header" id="myMoveTarget">
+      <h1 slot="start" class="tyl-typography--title" tcw-dialog-move-target>Notifications</h1>
+    </tcw-toolbar>
+    <div class="tyl-dialog-body__padding">
+      <tcw-list style="width: 600px;">
+        <tcw-list-item two-line="true" class="noPad" >
+          <span class="tyl-list-item__title">Job #123456 is complete</span>
+          <span class="tyl-list-item__subtitle">CA320.PDF - 2,543Kb</span>
+          <tcw-button slot="trailing">
+            <button>Download</button>
+          </tcw-button>
+        </tcw-list-item>
+      </tcw-list>
+    </div>
+  </template>
+</div>
+    <!-- end notification dialog -->
+
+	</tcw-scaffold>
+	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.4.0/webcomponents-bundle.js"></script>
+	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.4.0/custom-elements-es5-adapter.js"></script>
+	<script src="https://cdn.forge.tylertech.com/v1/libs/tcw-core/latest/tyler-components-web-core.min.js"></script>
+	<script src="https://cdn.forge.tylertech.com/v1/libs/tcw/latest/tyler-components-web-lib.min.js"></script>
+	<script>
+		TylerComponentsWeb.lib.defineComponents();
+	</script>
+	<!--<script>
+		TylerComponentsWeb.lib.defineMenuComponent();
+	</script> -->
+
+</body>
+
+</html>

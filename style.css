@@ -1,0 +1,206 @@
+:root {
+  /* height of the toolbar area */
+  --toolbarHeight: 104px; 
+  --omnibarHeight: 56px;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  background: var(--mdc-theme-background);
+}
+
+tcw-table {
+  overflow-x: auto;
+}
+
+.tyl-remove-spacing {
+  margin: 0px;
+  padding: 0px;
+}
+
+.tyl-content-container {
+  padding: 16px;
+  display: grid;
+}
+
+.tyl-content {
+  max-width: 960px;
+  //border: 4px dashed silver;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+#reportsHeader {
+ --tyl-toolbar-height: var(--toolbarHeight);
+}
+
+#navDrawer {
+  padding-top: var(--omnibarHeight);
+  --tyl-drawer-width: 300px;
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.show {
+  display: initial !important;
+}
+
+.table-card {
+  margin: 24px;
+}
+
+.hide {
+  display: none;
+}
+
+.hover {
+    visibility: hidden
+}
+
+#completed-jobs-table .tyl-table-body__row:hover .hover {
+    visibility: visible;
+}
+
+#completed-jobs-table .tyl-table-body__row--selected .hover {
+  visibility: visible;
+}
+
+#schedule-table .tyl-table-body__row:hover .hover {
+    visibility: visible;
+}
+
+#schedule-table .tyl-table-body__row--selected .hover {
+  visibility: visible;
+}
+
+#track-table .tyl-table-body__row:hover .hover {
+    visibility: visible;
+}
+
+#track-table .tyl-table-body__row--selected .hover {
+  visibility: visible;
+}
+
+.tyl-table-cell {
+  padding-right: 36px;
+}
+
+.table-icons {
+    color: var(--mdc-theme-text-icon-on-light);
+}
+
+.table-icons:focus {
+    color: var(--mdc-theme-text-secondary-on-light);
+}
+.table-icons:active {
+    color: var(--mdc-theme-text-primary-on-light);
+}
+.table-icons:hover {
+    color: var(--mdc-theme-text-primary-on-light);
+}
+
+.reportsFilters {
+  --tyl-drawer-width: 400px;
+}
+
+#reportsLeftFilters {
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 12px;
+}
+
+.reportsFiltersDiv {
+  display: block; 
+  max-width: 300px; 
+  padding-left: 24px; 
+  padding-right: 24px;
+}
+
+.container__paginator {
+  display: flex; 
+  justify-content: 
+  flex-end; background-color: white
+}
+
+tcw-list-item.noPad {
+  padding-left: 0px;
+}
+
+tcw-list.noPad {
+  padding: 0px;
+}
+
+tcw-checkbox.noPad {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+tcw-list-item.trackReport {
+  padding-left: 70px;
+}
+
+tcw-list-item.topLevel {
+  max-width: 500px;
+  padding-left: 100px;
+}
+
+.rightAlignCard {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tyl-dialog-container {
+  max-height: 90vh;
+  width: 50vw;
+}
+
+.dialog-table-container {
+  overflow: auto;
+  max-height: 400px;
+  position: relative;
+}
+
+.dialog-header {
+    --tyl-toolbar-padding: 24px;
+}
+
+.tyl-dialog-body__padding {
+  padding: 16px 24px;
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+tyl-dialog-body-text__margin {
+  margin: 0px;
+}
+
+.footer-toolbar {
+  --tyl-toolbar-height: 68px;
+  --tyl-toolbar-padding: 24px;
+}
+
+.footer-toolbar tcw-button:first-child {
+  margin-right: 8px
+}
+
+.displayedStep1 {
+  width: auto; 
+  //display: flex; 
+  //text-align: center; 
+  padding-left: 100px; 
+  max-width: 550px; 
+  padding-bottom: 12px;
+}
+
+#singleJob {
+  max-width: 450px;
+}
+
+.table-alert-icons {
+  //padding-top: 6px;
+  display: inline-flex;
+}
